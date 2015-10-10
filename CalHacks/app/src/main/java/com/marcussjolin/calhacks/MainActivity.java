@@ -2,7 +2,8 @@ package com.marcussjolin.calhacks;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -17,11 +18,15 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
+    private Context mContext;
+
     private static String NEW_USER = "is_new_user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mContext = this;
 
         // Hide action bar
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -64,7 +69,14 @@ public class MainActivity extends Activity {
     private void setStoreButton() {
         Button storeButton = (Button) findViewById(R.id.store_button);
 
-        storeButton.setOnClickListener(getStoreButtonClickListener());
+        storeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, StoreStuffActivity.class);
+                intent.putExtra(StoreStuffActivity.SIZE_SELECTION, true);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setGetButton() {
@@ -85,28 +97,5 @@ public class MainActivity extends Activity {
                 }
             });
         }
-    }
-
-    public View.OnClickListener getStoreButtonClickListener() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isNewUser = sharedPrefs.getBoolean(NEW_USER, true);
-
-        View.OnClickListener clickListener;
-        if (isNewUser) {
-            clickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            };
-        } else {
-            clickListener = new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            };
-        }
-        return clickListener;
     }
 }
