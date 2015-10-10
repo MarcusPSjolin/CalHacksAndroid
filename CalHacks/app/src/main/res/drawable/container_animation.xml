@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_animation"
+    android:oneshot="false">
+
+    <item android:drawable="@drawable/container_sunset_0" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_1" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_2" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_3" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_4" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_5" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_6" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_7" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_8" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_9" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_10" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_11" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_12" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_13" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_14" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_15" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_16" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_17" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_18" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_19" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_20" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_21" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_22" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_23" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_24" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_25" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_26" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_27" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_28" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_29" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_30" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_31" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_32" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_33" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_34" android:duration="50" />
+    <item android:drawable="@drawable/container_sunset_35" android:duration="50" />
+
+</animation-list>
