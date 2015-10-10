@@ -4,4 +4,7 @@
     <string name="settings">Settings</string>
     <string name="store_items">Store Stuff</string>
     <string name="get_items">Get Stuff</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_store_stuff">StoreStuffActivity</string>
+    <string name="need_some_info">We need some info</string>
 </resources>
