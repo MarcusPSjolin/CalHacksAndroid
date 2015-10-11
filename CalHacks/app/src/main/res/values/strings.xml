@@ -4,11 +4,19 @@
     <string name="settings">Settings</string>
     <string name="store_items">Store Stuff</string>
     <string name="get_items">Get Stuff</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
     <string name="title_activity_store_stuff">StoreStuffActivity</string>
     <string name="need_some_info">We need some info</string>
     <string name="small">Small\n12\"&#xd7;12\"&#xd7;12\"</string>
     <string name="medium">Medium\n18\"&#xd7;18\"&#xd7;18\"</string>
     <string name="large">Large\n24\"&#xd7;24\"&#xd7;24\"</string>
     <string name="pick_size">Pick a locker size&#8230;</string>
+    <string name="large_subtext">24"&#xd7;24"&#xd7;24"&#xd7;</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="buttong_save">Save</string>
 </resources>
