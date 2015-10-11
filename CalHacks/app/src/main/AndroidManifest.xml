@@ -25,11 +25,15 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:label="@string/need_some_info" >
         </activity>
         <activity
             android:name=".StoreStuffActivity"
             android:label="@string/title_activity_store_stuff" >
+        </activity>
+        <activity
+            android:name=".ConfirmActivity"
+            android:label="@string/confirm_activity" >
         </activity>
         <activity
             android:name=".ItemDescriptionActivity"
@@ -39,6 +43,18 @@
             android:name=".ConfirmPostmatesActivity"
             android:label="@string/title_activity_confirm_postmates" >
         </activity>
+        <activity
+            android:name=".PickupInformationActivity"
+            android:label="@string/pickup_info" >
+        </activity>
+        <activity
+            android:name=".GetStuffActivity"
+            android:label="@string/title_activity_get_stuff" >
+        </activity>
+
+        <meta-data android:name="com.here.android.maps.appid" android:value="XoKCbFz94Y3K4XaHgxKs"/>
+        <meta-data android:name="com.here.android.maps.apptoken" android:value="xGOs6CDL8pe02mYdVlEgow"/>
+
     </application>
 
 </manifest>

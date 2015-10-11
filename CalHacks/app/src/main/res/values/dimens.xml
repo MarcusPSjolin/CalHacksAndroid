@@ -12,8 +12,10 @@
     <dimen name="edit_text_description_height">100dp</dimen>
     <dimen name="confirmation_title_text_size">24sp</dimen>
     <dimen name="confirmation_price_text_size">18sp</dimen>
-    <dimen name="postmates_logo_margin_top">100dp</dimen>
+    <dimen name="postmates_logo_margin_top">85dp</dimen>
     <dimen name="postmates_logo_margin_bottom">10dp</dimen>
     <dimen name="bottom_button_margin">10dp</dimen>
-    <dimen name="postmates_dimen">150dp</dimen>
+    <dimen name="postmates_dimen">175dp</dimen>
+    <dimen name="map_height">250dp</dimen>
+    <dimen name="grid_view_text_size">18sp</dimen>
 </resources>

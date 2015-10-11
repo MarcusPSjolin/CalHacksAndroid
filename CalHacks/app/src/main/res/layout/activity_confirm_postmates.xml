@@ -29,7 +29,8 @@
         android:layout_marginBottom="@dimen/button_margin_bottom"
         android:gravity="center"
         android:text="@string/confirmation_title"
-        android:textSize="@dimen/confirmation_title_text_size"/>
+        android:textSize="@dimen/confirmation_title_text_size"
+        android:textColor="@color/dark_blue"/>
 
     <TextView
         android:id="@+id/confirmation_price"
@@ -39,7 +40,8 @@
         android:layout_marginTop="@dimen/button_margin_top"
         android:gravity="center"
         android:text="PRICE"
-        android:textSize="@dimen/confirmation_price_text_size"/>
+        android:textSize="@dimen/confirmation_price_text_size"
+        android:textColor="@color/dark_blue"/>
 
     <TextView
         android:id="@+id/confirmation_eta"
@@ -49,7 +51,8 @@
         android:layout_marginTop="@dimen/button_margin_top"
         android:gravity="center"
         android:text="ETA"
-        android:textSize="@dimen/confirmation_price_text_size"/>
+        android:textSize="@dimen/confirmation_price_text_size"
+        android:textColor="@color/dark_blue"/>
 
     <Button
         android:id="@+id/looks_good"

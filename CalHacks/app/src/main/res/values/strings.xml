@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CalHacks</string>
+    <string name="here_app_id">XoKCbFz94Y3K4XaHgxKs</string>
+    <string name="here_app_code">xGOs6CDL8pe02mYdVlEgow</string>
     <string name="settings">Settings</string>
     <string name="store_items">Store Stuff</string>
     <string name="get_items">Get Stuff</string>
@@ -11,6 +13,7 @@
     <string name="medium">Medium\n18\"&#xd7;18\"&#xd7;18\"</string>
     <string name="large">Large\n24\"&#xd7;24\"&#xd7;24\"</string>
     <string name="pick_size">Pick a locker size&#8230;</string>
+    <string name="confirm_address">Please confirm your address!</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="address">Address</string>
@@ -29,4 +32,16 @@
     <string name="must_take_picture">You must take a picture of your items!</string>
     <string name="take_photo">Photo of your item goes here!</string>
     <string name="looks_good">Looks good to me</string>
+    <string name="button_confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="confirm_activity">Confirm Address</string>
+    <string name="pickup_info">Pickup Information</string>
+    <string name="pickup_confirmation_text">It\'s on its way!</string>
+    <string name="title_activity_get_stuff">GetStuffActivity</string>
+    <string name="valid_first">Must enter a valid first name</string>
+    <string name="valid_last">Must enter a valid last name</string>
+    <string name="valid_city">Must enter a valid city</string>
+    <string name="valid_state">Must enter a valid state</string>
+    <string name="valid_address">Must enter a valid address</string>
+    <string name="valid_phone">Must enter a valid phone</string>
 </resources>

@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
     private Context mContext;
 
-    private static String NEW_USER = "is_new_user";
+    public static String NEW_USER = "is_new_user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
