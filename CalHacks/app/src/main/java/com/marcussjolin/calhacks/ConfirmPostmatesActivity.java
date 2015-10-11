@@ -30,9 +30,12 @@ public class ConfirmPostmatesActivity extends Activity {
 
     private ConfirmPostmatesActivity mActivity;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mActivity = this;
 
         setContentView(R.layout.activity_confirm_postmates);
