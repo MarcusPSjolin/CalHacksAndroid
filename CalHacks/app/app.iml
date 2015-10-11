@@ -88,5 +88,9 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="HERE-sdk-javadoc" level="project" />
+    <orderEntry type="library" exported="" name="gson-2.4" level="project" />
+    <orderEntry type="library" exported="" name="jts-1.13" level="project" />
+    <orderEntry type="library" exported="" name="HERE-sdk" level="project" />
   </component>
 </module>

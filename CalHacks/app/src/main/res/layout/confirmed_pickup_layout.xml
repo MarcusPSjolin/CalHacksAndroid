@@ -17,13 +17,13 @@
 
     <fragment
         class="com.here.android.mpa.mapping.MapFragment"
-        android:id="@+id/mapfragment"
+        android:id="@+id/map_fragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/map_height"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/button_margin_top"
         android:layout_marginBottom="@dimen/button_margin_bottom"/>
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
