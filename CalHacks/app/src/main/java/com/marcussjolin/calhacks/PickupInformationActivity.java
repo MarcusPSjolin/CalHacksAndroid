@@ -26,6 +26,8 @@ public class PickupInformationActivity extends Activity {
     private Map mMap = null;
     private MapFragment mMapFragment = null;
 
+    private PickupInformationActivity mActivity;
+
     private Socket mSocket;
     {
         try {
@@ -38,7 +40,8 @@ public class PickupInformationActivity extends Activity {
     private Emitter.Listener onNewMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
+            Log.d("TAG", "PickupInfo call for onNewMessage");
+            mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
@@ -69,8 +72,10 @@ public class PickupInformationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSocket.on("new message", onNewMessage);
+        mActivity = this;
+        mSocket.on("update", onNewMessage);
         mSocket.connect();
+        mSocket.emit("user_id", CalHacksApplication.USER_ID);
 
         setContentView(R.layout.confirmed_pickup_layout);
 
@@ -92,14 +97,13 @@ public class PickupInformationActivity extends Activity {
             }
         });
 
-        mSocket.emit("new message", CalHacksApplication.USER_ID);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mSocket.disconnect();
-        mSocket.off("new message", onNewMessage);
+        mSocket.off("update", onNewMessage);
     }
 
     private void updateView(String name, long pickupMillis, long dropoffMillis) {

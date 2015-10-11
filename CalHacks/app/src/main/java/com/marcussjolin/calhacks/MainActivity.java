@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mContext = this;
 
         // Hide action bar
@@ -35,10 +34,6 @@ public class MainActivity extends Activity {
         if (actionBar != null) {
             actionBar.hide();
         }
-
-        // Hide status bar
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
 
@@ -67,6 +62,18 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideStatusBar();
+    }
+
+    private void hideStatusBar() {
+        // Hide status bar
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
     private void setStoreButton() {
         Button storeButton = (Button) findViewById(R.id.store_button);
 
@@ -93,7 +100,8 @@ public class MainActivity extends Activity {
             storeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mContext, GetStuffActivity.class);
+                    startActivity(intent);
                 }
             });
         }

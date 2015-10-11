@@ -1,5 +1,6 @@
 package com.marcussjolin.calhacks;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,8 +45,8 @@ public class GetStuffActivity extends Activity {
         StringBuilder builder = new StringBuilder();
         builder.append(CalHacksApplication.URL);
         builder.append("items/");
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, builder.toString(), null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, builder.toString(), new JSONObject(), new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -55,12 +56,12 @@ public class GetStuffActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
-
                     }
                 });
 
         // Access the RequestQueue through your singleton class.
         queue.add(jsonObjectRequest);
+
     }
 
     private void setPostOnResponse() {

@@ -1,5 +1,6 @@
 package com.marcussjolin.calhacks;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -28,6 +29,10 @@ public class StoreStuffActivity extends Activity {
     private void setToolBarTitle() {
         String title = getString(R.string.pick_size);
         setTitle(title);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        }
     }
 
     private void setButtons() {
