@@ -7,10 +7,8 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_store_stuff">StoreStuffActivity</string>
     <string name="need_some_info">We need some info</string>
-    <string name="small">Small</string>
-    <string name="small_subtext">12"&#xd7;12";&#xd7;12"&#xd7;</string>
-    <string name="medium">Medium</string>
-    <string name="medium_subtext">18";&#xd7;18"&#xd7;18"&#xd7;</string>
-    <string name="large">Large</string>
-    <string name="large_subtext">24"&#xd7;24"&#xd7;24"&#xd7;</string>
+    <string name="small">Small\n12\"&#xd7;12\"&#xd7;12\"</string>
+    <string name="medium">Medium\n18\"&#xd7;18\"&#xd7;18\"</string>
+    <string name="large">Large\n24\"&#xd7;24\"&#xd7;24\"</string>
+    <string name="pick_size">Pick a locker size&#8230;</string>
 </resources>
