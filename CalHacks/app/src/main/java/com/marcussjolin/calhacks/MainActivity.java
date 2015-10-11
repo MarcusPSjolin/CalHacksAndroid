@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     private Context mContext;
 
     public static String NEW_USER = "is_new_user";
+    public static String CURRENT_ITEM = "current_item";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

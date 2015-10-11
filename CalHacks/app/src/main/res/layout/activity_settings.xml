@@ -61,11 +61,12 @@
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_height"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/bottom_button_margin"
-        android:hint="@string/buttong_save"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_ripple" />
+        android:background="@drawable/button_ripple"
+        android:text="@string/buttong_save"
+        android:textColor="@color/white"/>
 
 </RelativeLayout>

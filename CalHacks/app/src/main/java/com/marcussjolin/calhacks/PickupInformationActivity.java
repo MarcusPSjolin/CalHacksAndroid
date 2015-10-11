@@ -34,7 +34,6 @@ public class PickupInformationActivity extends Activity {
                     mMap.setZoomLevel((mMap.getMaxZoomLevel() + mMap.getMinZoomLevel()) / 2);
                 } else {
                     System.out.println("ERROR: Cannot initialize Map Fragment");
-                    Log.d("TAG", "Exception - " + error);
                 }
             }
         });

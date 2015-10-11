@@ -1,12 +1,16 @@
 package com.marcussjolin.calhacks;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +38,7 @@ public class ItemDescriptionActivity extends Activity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_TAKE_PHOTO = 1;
+    private static final int REQUEST_UPDATE_ADDRESS = 0;
 
     public static final String LOCKER_SIZE = "size";
 
@@ -52,6 +67,12 @@ public class ItemDescriptionActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             setPic();
+        } else if (requestCode == REQUEST_UPDATE_ADDRESS) {
+            if (resultCode == RESULT_OK) {
+                setPostForItem();
+            } else {
+
+            }
         }
     }
 
@@ -72,8 +93,19 @@ public class ItemDescriptionActivity extends Activity {
             public void onClick(View v) {
                 boolean valid = isTitleValid() && mPhotoTaken;
                 if (valid) {
-                    Intent intent = new Intent(mActivity, ConfirmPostmatesActivity.class);
-                    startActivity(intent);
+                    SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+                    boolean isNewUser = sharedPrefs.getBoolean(MainActivity.NEW_USER, true);
+
+                    Intent intent;
+                    if (isNewUser) {
+                        intent = new Intent(mActivity, SettingsActivity.class);
+                        intent.putExtra(SettingsActivity.FIRST_USE, true);
+                        startActivityForResult(intent, REQUEST_UPDATE_ADDRESS);
+                    } else {
+                        setPostForItem();
+                        intent = new Intent(mActivity, ConfirmPostmatesActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     if (!isTitleValid()) {
                         Toast.makeText(mActivity, R.string.must_enter_valid_title, Toast.LENGTH_LONG).show();
@@ -151,6 +183,64 @@ public class ItemDescriptionActivity extends Activity {
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         cameraButton.setImageBitmap(bitmap);
         mPhotoTaken = true;
+    }
+
+    private void setPostForItem() {
+        RequestQueue queue = Volley.newRequestQueue(mActivity);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(CalHacksApplication.URL);
+        builder.append("items/");
+
+        JSONObject object = new JSONObject();
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+
+            EditText title = (EditText) findViewById(R.id.title);
+            EditText desc = (EditText) findViewById(R.id.description);
+            Bitmap image = BitmapFactory.decodeFile(mCurrentPhotoPath);
+            Bitmap[] images = new Bitmap[1];
+            images[0] = image;
+
+            object.put(Constants.Item.title, title.getText().toString());
+            object.put(Constants.Item.description, desc.getText().toString());
+            object.put(Constants.Item.state, 1);
+            object.put(Constants.User.user_id, CalHacksApplication.USER_ID);
+            object.put(Constants.Item.facility, CalHacksApplication.FACILITY);
+            object.put(Constants.Item.images, images);
+        } catch (JSONException e) {
+            Log.e("TAG", "JSONException " + e);
+        }
+
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+                try {
+                    sharedPrefs.edit().putString(MainActivity.CURRENT_ITEM, response.getString(Constants.Response.id)).apply();
+                    setPostOnResponse();
+                } catch (Exception e) {
+                    Log.e("TAG", "Exception in onResponse() = " + e);
+                }
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "onErrorResponse error = " + error);
+            }
+        };
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                builder.toString(), object, responseListener, errorListener);
+
+        queue.add(jsonObjectRequest);
+    }
+
+    private void setPostOnResponse() {
+        
     }
 
 }
