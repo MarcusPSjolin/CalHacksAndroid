@@ -92,5 +92,6 @@
     <orderEntry type="library" exported="" name="gson-2.4" level="project" />
     <orderEntry type="library" exported="" name="jts-1.13" level="project" />
     <orderEntry type="library" exported="" name="HERE-sdk" level="project" />
+    <orderEntry type="module" module-name="volley" exported="" />
   </component>
 </module>
