@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +31,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ItemDescriptionActivity extends Activity {
 
@@ -71,8 +70,6 @@ public class ItemDescriptionActivity extends Activity {
         } else if (requestCode == REQUEST_UPDATE_ADDRESS) {
             if (resultCode == RESULT_OK) {
                 setPostForItem();
-            } else {
-
             }
         }
     }
@@ -180,6 +177,10 @@ public class ItemDescriptionActivity extends Activity {
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         cameraButton.setImageBitmap(bitmap);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+        Set<String> strings = sharedPrefs.getStringSet(CalHacksApplication.IMAGE_FILES, new HashSet<String>());
+        strings.add(mCurrentPhotoPath);
+        sharedPrefs.edit().putStringSet(CalHacksApplication.IMAGE_FILES, strings);
         mPhotoTaken = true;
     }
 

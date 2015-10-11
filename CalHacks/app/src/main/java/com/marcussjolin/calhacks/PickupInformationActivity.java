@@ -3,6 +3,7 @@ package com.marcussjolin.calhacks;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.DecimalFormat;
 
 public class PickupInformationActivity extends Activity {
 
@@ -44,25 +46,30 @@ public class PickupInformationActivity extends Activity {
             mActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    Log.d("TAG", "PickupInfo run");
                     JSONObject data = (JSONObject) args[0];
                     String name;
+                    String imageUrl;
                     long lng;
                     long lat;
                     long pickupMillis;
                     long dropoffMillis;
                     try {
-                        name = data.getJSONObject(Constants.PostmatesUpdates.courier)
-                                .getString(Constants.PostmatesUpdates.courier);
-                        lng = data.getLong(Constants.PostmatesUpdates.lng);
-                        lat = data.getLong(Constants.PostmatesUpdates.lat);
+                        name = data.getJSONObject(Constants.PostmatesUpdates.courier).getString(Constants.PostmatesUpdates.Courier.name);
+                        lng = data.getJSONObject(Constants.PostmatesUpdates.courier)
+                                .getJSONObject(Constants.PostmatesUpdates.location).getLong(Constants.PostmatesUpdates.lng);
+                        lat = data.getJSONObject(Constants.PostmatesUpdates.courier)
+                                .getJSONObject(Constants.PostmatesUpdates.location).getLong(Constants.PostmatesUpdates.lat);
                         pickupMillis = data.getLong(Constants.PostmatesUpdates.pickup_millis);
                         dropoffMillis = data.getLong(Constants.PostmatesUpdates.dropoff_millis);
+                        imageUrl = data.getJSONObject(Constants.PostmatesUpdates.courier).getString(Constants.PostmatesUpdates.image_url);
                     } catch (JSONException e) {
+                        Log.d("TAG", "JSONException e = " + e);
                         return;
                     }
 
                     // add the message to view
-                    updateView(name, pickupMillis, dropoffMillis);
+                    updateView(name, imageUrl, pickupMillis, dropoffMillis);
                     updateMap(lat, lng);
                 }
             });
@@ -106,16 +113,20 @@ public class PickupInformationActivity extends Activity {
         mSocket.off("update", onNewMessage);
     }
 
-    private void updateView(String name, long pickupMillis, long dropoffMillis) {
+    private void updateView(String name, String imageUrl, long pickupMillis, long dropoffMillis) {
         TextView updateText = (TextView) findViewById(R.id.update_text);
+        ImageView image = (ImageView) findViewById(R.id.driver_image);
+
         String str = name + " is coming!";
 
-        if (pickupMillis != 0) {
-            str += " ETA for pickup is " + pickupMillis/60000.0 + " minutes.";
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        if (pickupMillis > 0) {
+            str += " ETA for pickup is " + df.format(pickupMillis/60000) + " minutes.";
         }
 
-        if (dropoffMillis != 0) {
-            str += " ETA for dropoff is " + dropoffMillis/60000.0 + " minutes.";
+        if (dropoffMillis > 0) {
+            str += " ETA for dropoff is " + df.format(dropoffMillis/60000) + " minutes.";
         }
 
         updateText.setText(str);
@@ -131,6 +142,6 @@ public class PickupInformationActivity extends Activity {
         MapMarker marker = new MapMarker(new GeoCoordinate(lat, lng), image);
         mMap.addMapObject(marker);
         mMap.setCenter(new GeoCoordinate(lat, lng, 0.0), Map.Animation.NONE);
-        mMap.setZoomLevel((mMap.getMaxZoomLevel() + mMap.getMinZoomLevel()) / 2);
+        mMap.setZoomLevel((mMap.getMaxZoomLevel() + mMap.getMinZoomLevel())/1.5);
     }
 }

@@ -12,7 +12,7 @@
 <!--    <color name="dark_primary">#3F51B5</color>
     <color name="primary">#C5CAE9</color>
     <color name="accent">#FFEB3B</color>-->
-    <color name="dark_primary">#303F9F</color>
-    <color name="primary">#3F51B5</color>
+    <color name="dark_primary">#242b56</color>
+    <color name="primary">#303b78</color>
     <color name="accent">#FFC107</color>
 </resources>

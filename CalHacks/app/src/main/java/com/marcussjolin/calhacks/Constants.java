@@ -41,11 +41,13 @@ public class Constants {
             public static String name = "name";
         }
 
+        public static String location = "location";
         public static String lat = "lat";
         public static String lng = "lng";
         public static String pickup_eta = "pickup_eta";
         public static String dropoff_eta = "dropoff_eta";
         public static String pickup_millis = "pickup_millis";
         public static String dropoff_millis = "dropoff_millis";
+        public static String image_url = "image_url";
     }
 }

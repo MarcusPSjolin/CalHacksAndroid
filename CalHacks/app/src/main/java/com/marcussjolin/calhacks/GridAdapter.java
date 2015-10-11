@@ -15,7 +15,7 @@ public class GridAdapter extends BaseAdapter {
 
     private Context mContext;
     private ViewHolder mViewHolder;
-    private ArrayList<Object> mObjects;
+    private ArrayList<String> mObjects;
     private LayoutInflater mInflater;
 
     public GridAdapter(final Context context) {
@@ -52,7 +52,6 @@ public class GridAdapter extends BaseAdapter {
             mViewHolder = new ViewHolder();
             mViewHolder.image = (ImageView) convertView.findViewById(R.id.item_image);
             mViewHolder.title = (TextView) convertView.findViewById(R.id.item_title);
-            mViewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.item_check);
 
             convertView.setTag(mViewHolder);
         } else {
@@ -62,14 +61,13 @@ public class GridAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void updateObjects(ArrayList<Object> objects) {
+    public void updateObjects(ArrayList<String> objects) {
         mObjects = objects;
         notifyDataSetChanged();
     }
 
-    private class ViewHolder {
+    public class ViewHolder {
         ImageView image;
         TextView title;
-        CheckBox checkBox;
     }
 }

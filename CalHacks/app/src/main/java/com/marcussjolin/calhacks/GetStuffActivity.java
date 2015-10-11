@@ -2,42 +2,54 @@ package com.marcussjolin.calhacks;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
-import com.here.android.mpa.common.GeoCoordinate;
-import com.here.android.mpa.common.OnEngineInitListener;
-import com.here.android.mpa.mapping.Map;
-import com.here.android.mpa.mapping.MapFragment;
 
-import org.json.JSONException;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class GetStuffActivity extends Activity {
 
     GridView mGrid;
     private GetStuffActivity mActivity;
+    //private GridAdapter mAdapter;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         setContentView(R.layout.activity_get_stuff);
 
         mGrid = (GridView) findViewById(R.id.grid);
-        mGrid.setAdapter(new GridAdapter(this));
+        getItems();
+        mAdapter = new ArrayAdapter<String>(this, R.layout.grid_item, R.id.item_title);
+        mGrid.setAdapter(mAdapter);
+        mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setPostOnResponse(view);
+            }
+        });
+        Log.d("TAG", "onCreate");
+
     }
 
     private void getItems() {
@@ -50,12 +62,25 @@ public class GetStuffActivity extends Activity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("TAG", "RESPONSE = " + response);
+                        try {
+                            JSONArray array = response.toJSONArray(response.names());
+                            ArrayList<String> strings = new ArrayList<>();
+                            for (int i = 0; i < array.length(); i++) {
+                                strings.add(i, array.getJSONObject(i).getString("title"));
+                            }
+                            Log.d("TAG", "Strings = " + strings.toString());
+                            mAdapter.addAll(strings);
+                            mAdapter.notifyDataSetChanged();
+                        } catch (Exception e) {
+                            Log.d("TAG", "Exception = " + e);
+                        }
                     }
                 }, new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // TODO Auto-generated method stub
+                        Log.d("TAG", "onErrorResponse " + error);
                     }
                 });
 
@@ -64,8 +89,42 @@ public class GetStuffActivity extends Activity {
 
     }
 
-    private void setPostOnResponse() {
+    private void setPostOnResponse(View view) {
+        RequestQueue queue = Volley.newRequestQueue(mActivity);
+        GridAdapter.ViewHolder holder = (GridAdapter.ViewHolder) view.getTag();
+        String itemId = holder.title.getText().toString();
 
+        StringBuilder builder = new StringBuilder();
+        builder.append(CalHacksApplication.URL);
+        builder.append("items/");
+        builder.append(itemId);
+        builder.append("/quotedropoff");
+
+        JSONObject object = new JSONObject();
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("TAG", "onResponse");
+                Intent intent = new Intent(mActivity, ConfirmPostmatesActivity.class);
+                intent.putExtra(ConfirmPostmatesActivity.ID, response.optString(Constants.PostmatesResponse.id));
+                intent.putExtra(ConfirmPostmatesActivity.FEE, response.optString(Constants.PostmatesResponse.fee));
+                intent.putExtra(ConfirmPostmatesActivity.CURRENCY, response.optString(Constants.PostmatesResponse.currency));
+                intent.putExtra(ConfirmPostmatesActivity.DURATION, response.optString(Constants.PostmatesResponse.duration));
+                startActivity(intent);
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "onErrorResponse error = " + error);
+            }
+        };
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                builder.toString(), object, responseListener, errorListener);
+
+        queue.add(jsonObjectRequest);
     }
 
 

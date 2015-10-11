@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class StoreStuffActivity extends Activity {
 
@@ -29,10 +30,6 @@ public class StoreStuffActivity extends Activity {
     private void setToolBarTitle() {
         String title = getString(R.string.pick_size);
         setTitle(title);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(getDrawable(R.drawable.ic_arrow_back_white_24dp));
-        }
     }
 
     private void setButtons() {
