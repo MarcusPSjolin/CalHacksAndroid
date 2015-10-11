@@ -1,28 +1,65 @@
 package com.marcussjolin.calhacks;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class StoreStuffActivity extends Activity {
 
-    public static final String SIZE_SELECTION = "size_selection";
+    private StoreStuffActivity mActivity;
+
+    public enum LockerSize {
+        SMALL,
+        MEDIUM,
+        LARGE
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = this;
         setContentView(R.layout.activity_store_stuff);
+        setToolBarTitle();
+        setButtons();
+    }
 
-        boolean isSizeSelection = getIntent().getBooleanExtra(SIZE_SELECTION, false);
+    private void setToolBarTitle() {
+        String title = getString(R.string.pick_size);
+        setTitle(title);
+    }
 
-        if (isSizeSelection) {
-            StoreStuffSizeFragment fragment = new StoreStuffSizeFragment();
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(fragment, StoreStuffSizeFragment.STORE_STUFF_SIZE_FRAGMENT);
-            fragmentTransaction.commit();
-        }
+    private void setButtons() {
+        Button smallButton = (Button) findViewById(R.id.button_small);
+        Button mediumButton = (Button) findViewById(R.id.button_medium);
+        Button largeButton = (Button) findViewById(R.id.button_large);
+
+        View.OnClickListener onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LockerSize size = LockerSize.SMALL;
+
+                switch (v.getId()) {
+                    case R.id.button_small:
+                        size = LockerSize.SMALL;
+                        break;
+                    case R.id.button_medium:
+                        size = LockerSize.MEDIUM;
+                        break;
+                    case R.id.button_large:
+                        size = LockerSize.LARGE;
+                        break;
+                }
+
+                Intent intent = new Intent(mActivity, ItemDescriptionActivity.class);
+                intent.putExtra(ItemDescriptionActivity.LOCKER_SIZE, size);
+                startActivity(intent);
+            }
+        };
+
+        smallButton.setOnClickListener(onClickListener);
+        mediumButton.setOnClickListener(onClickListener);
+        largeButton.setOnClickListener(onClickListener);
     }
 }

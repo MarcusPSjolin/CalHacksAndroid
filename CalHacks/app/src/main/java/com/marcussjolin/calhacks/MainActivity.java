@@ -73,7 +73,6 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, StoreStuffActivity.class);
-                intent.putExtra(StoreStuffActivity.SIZE_SELECTION, true);
                 startActivity(intent);
             }
         });

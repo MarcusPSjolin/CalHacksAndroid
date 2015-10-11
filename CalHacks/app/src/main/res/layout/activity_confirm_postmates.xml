@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:gravity="center_horizontal"
+    tools:context="com.marcussjolin.calhacks.ConfirmPostmatesActivity">
+
+    <ImageView
+        android:id="@+id/postmates_logo"
+        android:layout_width="@dimen/postmates_dimen"
+        android:layout_height="@dimen/postmates_dimen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/postmates_logo_margin_top"
+        android:layout_marginBottom="@dimen/postmates_logo_margin_bottom"
+        android:src="@drawable/postmates"
+        android:layout_alignParentTop="true"/>
+
+    <TextView
+        android:id="@+id/confirmation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postmates_logo"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:layout_marginBottom="@dimen/button_margin_bottom"
+        android:gravity="center"
+        android:text="@string/confirmation_title"
+        android:textSize="@dimen/confirmation_title_text_size"/>
+
+    <TextView
+        android:id="@+id/confirmation_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmation"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:gravity="center"
+        android:text="PRICE"
+        android:textSize="@dimen/confirmation_price_text_size"/>
+
+    <TextView
+        android:id="@+id/confirmation_eta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmation_price"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:gravity="center"
+        android:text="ETA"
+        android:textSize="@dimen/confirmation_price_text_size"/>
+
+    <Button
+        android:id="@+id/looks_good"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/bottom_button_margin"
+        android:background="@drawable/button_ripple"
+        android:text="@string/looks_good"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>
