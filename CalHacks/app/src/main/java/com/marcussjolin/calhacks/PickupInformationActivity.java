@@ -21,11 +21,6 @@ public class PickupInformationActivity extends Activity {
         setContentView(R.layout.confirmed_pickup_layout);
 
         mMapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
-        if (mMapFragment == null) {
-            Log.d("TAG", "Map is null");
-        } else {
-            Log.d("TAG", "Map is NOT null");
-        }
         mMapFragment.init(new OnEngineInitListener() {
             @Override
             public void onEngineInitializationCompleted(OnEngineInitListener.Error error) {
