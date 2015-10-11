@@ -15,16 +15,21 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".StoreStuffActivity"
             android:label="@string/title_activity_store_stuff" >
+        </activity>
+
+        <activity
+            android:name=".ConfirmActivity"
+            android:label="@string/confirm_activity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
     </application>
 
