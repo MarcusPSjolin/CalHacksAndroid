@@ -12,7 +12,7 @@
         android:text="@string/pickup_confirmation_text"
         android:textSize="@dimen/confirmation_title_text_size"
         android:textColor="@color/dark_blue"
-        android:layout_marginTop="@dimen/button_margin_top"
+        android:layout_marginTop="@dimen/title_margin_top"
         android:layout_marginBottom="@dimen/button_margin_bottom"/>
 
     <fragment

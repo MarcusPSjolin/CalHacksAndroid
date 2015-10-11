@@ -44,4 +44,7 @@
     <string name="valid_state">Must enter a valid state</string>
     <string name="valid_address">Must enter a valid address</string>
     <string name="valid_phone">Must enter a valid phone</string>
+    <string name="price">Price: </string>
+    <string name="eta">ETA: </string>
+    <string name="minutes">mins</string>
 </resources>

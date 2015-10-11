@@ -16,6 +16,7 @@
     <dimen name="postmates_logo_margin_bottom">10dp</dimen>
     <dimen name="bottom_button_margin">10dp</dimen>
     <dimen name="postmates_dimen">175dp</dimen>
-    <dimen name="map_height">250dp</dimen>
+    <dimen name="map_height">350dp</dimen>
     <dimen name="grid_view_text_size">18sp</dimen>
+    <dimen name="title_margin_top">32dp</dimen>
 </resources>

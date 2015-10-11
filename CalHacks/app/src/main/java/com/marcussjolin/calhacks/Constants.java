@@ -25,4 +25,11 @@ public class Constants {
     public static class Response {
         public static String id = "_id";
     }
+
+    public static class PostmatesResponse {
+        public static String id = "id";
+        public static String fee = "fee";
+        public static String currency = "currency";
+        public static String duration = "duration";
+    }
 }

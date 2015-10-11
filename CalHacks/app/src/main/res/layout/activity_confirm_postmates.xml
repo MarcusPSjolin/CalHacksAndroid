@@ -39,7 +39,6 @@
         android:layout_below="@id/confirmation"
         android:layout_marginTop="@dimen/button_margin_top"
         android:gravity="center"
-        android:text="PRICE"
         android:textSize="@dimen/confirmation_price_text_size"
         android:textColor="@color/dark_blue"/>
 
@@ -50,7 +49,6 @@
         android:layout_below="@id/confirmation_price"
         android:layout_marginTop="@dimen/button_margin_top"
         android:gravity="center"
-        android:text="ETA"
         android:textSize="@dimen/confirmation_price_text_size"
         android:textColor="@color/dark_blue"/>
 

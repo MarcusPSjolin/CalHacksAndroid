@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Currency;
 import java.util.Date;
 
 public class ItemDescriptionActivity extends Activity {
@@ -96,15 +98,12 @@ public class ItemDescriptionActivity extends Activity {
                     SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
                     boolean isNewUser = sharedPrefs.getBoolean(MainActivity.NEW_USER, true);
 
-                    Intent intent;
                     if (isNewUser) {
-                        intent = new Intent(mActivity, SettingsActivity.class);
+                        Intent intent = new Intent(mActivity, SettingsActivity.class);
                         intent.putExtra(SettingsActivity.FIRST_USE, true);
                         startActivityForResult(intent, REQUEST_UPDATE_ADDRESS);
                     } else {
                         setPostForItem();
-                        intent = new Intent(mActivity, ConfirmPostmatesActivity.class);
-                        startActivity(intent);
                     }
                 } else {
                     if (!isTitleValid()) {
@@ -203,12 +202,11 @@ public class ItemDescriptionActivity extends Activity {
             Bitmap[] images = new Bitmap[1];
             images[0] = image;
 
-            object.put(Constants.Item.title, title.getText().toString());
-            object.put(Constants.Item.description, desc.getText().toString());
+            object.put(Constants.Item.title, title.getText().toString().trim());
+            object.put(Constants.Item.description, desc.getText().toString().trim());
             object.put(Constants.Item.state, 1);
             object.put(Constants.User.user_id, CalHacksApplication.USER_ID);
             object.put(Constants.Item.facility, CalHacksApplication.FACILITY);
-            object.put(Constants.Item.images, images);
         } catch (JSONException e) {
             Log.e("TAG", "JSONException " + e);
         }
@@ -240,7 +238,41 @@ public class ItemDescriptionActivity extends Activity {
     }
 
     private void setPostOnResponse() {
-        
+        RequestQueue queue = Volley.newRequestQueue(mActivity);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mActivity);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(CalHacksApplication.URL);
+        builder.append("items/");
+        builder.append(sharedPrefs.getString(MainActivity.CURRENT_ITEM, ""));
+        builder.append("/quotepickup");
+
+        JSONObject object = new JSONObject();
+        Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("TAG", "onResponse");
+                Intent intent = new Intent(mActivity, ConfirmPostmatesActivity.class);
+                intent.putExtra(ConfirmPostmatesActivity.ID, response.optString(Constants.PostmatesResponse.id));
+                intent.putExtra(ConfirmPostmatesActivity.FEE, response.optString(Constants.PostmatesResponse.fee));
+                intent.putExtra(ConfirmPostmatesActivity.CURRENCY, response.optString(Constants.PostmatesResponse.currency));
+                intent.putExtra(ConfirmPostmatesActivity.DURATION, response.optString(Constants.PostmatesResponse.duration));
+                startActivity(intent);
+            }
+        };
+
+        Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("TAG", "onErrorResponse error = " + error);
+            }
+        };
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                builder.toString(), object, responseListener, errorListener);
+
+        queue.add(jsonObjectRequest);
     }
 
 }
